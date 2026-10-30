@@ -10,3 +10,6 @@ ro.vendor.trace.        u:object_r:vendor_odm_info_prop:s0
 vendor.fp.            u:object_r:vendor_fp_prop:s0
 ro.vendor.fp.         u:object_r:vendor_fp_prop:s0
 persist.vendor.fp.    u:object_r:vendor_fp_prop:s0
+
+# SoC
+ro.vendor.qti.soc_sku         u:object_r:vendor_soc_sku_prop:s0

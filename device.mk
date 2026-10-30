@@ -430,11 +430,13 @@ PRODUCT_COPY_FILES += \
 
 # Vendor init
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/etc/init.fairphone.rc:$(TARGET_COPY_OUT_ODM)/etc/init/hw/init.fairphone.rc \
     $(LOCAL_PATH)/rootdir/etc/init.qcom.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.qcom.rc \
     $(LOCAL_PATH)/rootdir/etc/init.target.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.target.rc
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/bin/init.class_main.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.class_main.sh \
+    $(LOCAL_PATH)/rootdir/bin/init.fairphone.sh:$(TARGET_COPY_OUT_ODM)/bin/init.fairphone.sh \
     $(LOCAL_PATH)/rootdir/bin/init.qcom.early_boot.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.early_boot.sh \
     $(LOCAL_PATH)/rootdir/bin/init.qcom.post_boot.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.post_boot.sh \
     $(LOCAL_PATH)/rootdir/bin/init.qcom.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.sh

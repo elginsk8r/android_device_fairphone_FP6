@@ -1,3 +1,6 @@
 # Common
 vendor_public_prop(vendor_fp_prop);
 vendor_public_prop(vendor_odm_info_prop);
+
+# SoC
+vendor_internal_prop(vendor_soc_sku_prop);
