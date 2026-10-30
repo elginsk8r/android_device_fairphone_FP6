@@ -300,6 +300,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     FrameworksResTarget_Vendor \
     SettingsProviderResCommon \
+    SettingsProviderResTarget \
     WifiResTarget \
 
 PRODUCT_PACKAGES += \
