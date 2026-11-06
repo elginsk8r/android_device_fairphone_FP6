@@ -1,0 +1,26 @@
+//
+// SPDX-FileCopyrightText: The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+python_binary_host {
+    name: "convert_haptic_ram",
+    main: "convert_ram.py",
+    srcs: ["convert_ram.py"],
+}
+
+genrule {
+    name: "convert_haptic_ram_json",
+    enabled: true,
+    srcs: ["haptic_ram.json"],
+    tools: ["convert_haptic_ram"],
+    cmd: "$(location convert_haptic_ram) -c $(in) -o $(out)",
+    out: ["haptic_ram.bin"],
+}
+
+prebuilt_firmware {
+    name: "haptic_ram_vendor",
+    filename: "haptic_ram.bin",
+    src: ":convert_haptic_ram_json",
+    vendor: true,
+}

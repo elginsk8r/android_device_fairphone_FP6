@@ -452,6 +452,7 @@ PRODUCT_COPY_FILES += \
 
 # Vibrator
 PRODUCT_PACKAGES += \
+    haptic_ram_vendor \
     vendor.qti.hardware.vibrator.service
 
 PRODUCT_COPY_FILES += \
