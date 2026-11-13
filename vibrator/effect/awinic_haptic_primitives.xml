@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<!--
+  Awinic HapticHV effect map for the QTI vibrator HAL (USE_EFFECT_STREAM).
+  Search order: /odm/etc/awinic_haptic_primitives.xml, then /vendor/etc/awinic_haptic_primitives.xml.
+
+  Only one RAM waveform is sent per request (first int16 of FF_PERIODIC custom_data).
+  Valid wave IDs are 1..ram_num-1 (ram_num is the driver's reserved loop slot).
+
+  Example:
+    <haptic version="1">
+      <ram rate_hz="24000" margin_ms="2"/>
+      <waves>
+        <wave id="1" ms="12" role="light" label="tick"/>
+      </waves>
+      <effects>
+        <effect id="0" name="CLICK" wave="1"/>
+      </effects>
+      <primitives>
+        <primitive id="1" name="CLICK" wave="1"/>
+      </primitives>
+    </haptic>
+
+  Attributes:
+    version   - Config schema version (currently 1).
+    rate_hz   - RAM waveform PWM playback rate in Hz (1000..200000; default 24000).
+    margin_ms - Extra milliseconds added when duration is derived from RAM byte size (0..100; default 2).
+    num       - Optional override for total RAM waveform slots (2..31; overrides bin/sysfs ram_num).
+    bin       - Optional explicit path to haptic_ram.bin.
+    id        - Wave slot (1..31), Effect index (0..21), or CompositePrimitive index (0..8).
+    ms        - Explicit duration in ms for a wave slot (1..5000; bypasses bin size and margin_ms).
+    role      - Optional default tier ("light", "mid", or "heavy") for unmapped effects/primitives.
+    label     - Human-readable note for a RAM waveform slot.
+    name      - Symbolic HAL enum name for documentation/validation.
+    wave      - Mapped RAM wave ID (1..ram_num-1) or "none" to mark unsupported.
+-->
+<haptic version="1">
+  <ram rate_hz="24000" margin_ms="2"/>
+
+  <waves>
+    <wave id="1" ms="12" role="light" label="pop"/>
+    <wave id="2" ms="18" role="mid"   label="click"/>
+    <wave id="3" ms="28" role="heavy" label="heavy_click"/>
+    <wave id="4" ms="10"              label="tick"/>
+    <wave id="5" ms="22"              label="thud"/>
+  </waves>
+
+  <!-- android.hardware.vibrator.Effect (0..21) -->
+  <effects>
+    <effect id="0"  name="CLICK"        wave="2"/>
+    <effect id="1"  name="DOUBLE_CLICK" wave="none"/>
+    <effect id="2"  name="TICK"         wave="4"/>
+    <effect id="3"  name="THUD"         wave="5"/>
+    <effect id="4"  name="POP"          wave="1"/>
+    <effect id="5"  name="HEAVY_CLICK"  wave="3"/>
+    <effect id="6"  name="RINGTONE_1"   wave="none"/>
+    <effect id="7"  name="RINGTONE_2"   wave="none"/>
+    <effect id="8"  name="RINGTONE_3"   wave="none"/>
+    <effect id="9"  name="RINGTONE_4"   wave="none"/>
+    <effect id="10" name="RINGTONE_5"   wave="none"/>
+    <effect id="11" name="RINGTONE_6"   wave="none"/>
+    <effect id="12" name="RINGTONE_7"   wave="none"/>
+    <effect id="13" name="RINGTONE_8"   wave="none"/>
+    <effect id="14" name="RINGTONE_9"   wave="none"/>
+    <effect id="15" name="RINGTONE_10"  wave="none"/>
+    <effect id="16" name="RINGTONE_11"  wave="none"/>
+    <effect id="17" name="RINGTONE_12"  wave="none"/>
+    <effect id="18" name="RINGTONE_13"  wave="none"/>
+    <effect id="19" name="RINGTONE_14"  wave="none"/>
+    <effect id="20" name="RINGTONE_15"  wave="none"/>
+    <effect id="21" name="TEXTURE_TICK" wave="4"/>
+  </effects>
+
+  <!-- android.hardware.vibrator.CompositePrimitive (0..8, HAL passes id | 0x8000) -->
+  <primitives>
+    <primitive id="0" name="NOOP"       wave="none"/>
+    <primitive id="1" name="CLICK"      wave="2"/>
+    <primitive id="2" name="THUD"       wave="5"/>
+    <primitive id="3" name="SPIN"       wave="none"/>
+    <primitive id="4" name="QUICK_RISE" wave="none"/>
+    <primitive id="5" name="SLOW_RISE"  wave="none"/>
+    <primitive id="6" name="QUICK_FALL" wave="none"/>
+    <primitive id="7" name="LIGHT_TICK" wave="1"/>
+    <primitive id="8" name="LOW_TICK"   wave="2"/>
+  </primitives>
+</haptic>

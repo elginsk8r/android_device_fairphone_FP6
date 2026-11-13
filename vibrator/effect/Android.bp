@@ -9,10 +9,16 @@ cc_library_shared {
         "effect.cpp",
     ],
     shared_libs: [
-        "libcutils",
-        "libutils",
+        "liblog",
+        "libtinyxml2",
     ],
     header_libs: [
         "libqtivibratoreffect_headers",
     ],
+}
+
+prebuilt_etc {
+    name: "awinic_haptic_primitives.xml",
+    src: "awinic_haptic_primitives.xml",
+    vendor: true,
 }

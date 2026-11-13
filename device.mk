@@ -455,6 +455,7 @@ $(call soong_config_set,qti_vibrator,effect_lib,libqtivibratoreffect-awinic)
 $(call soong_config_set_bool,qti_vibrator,use_effect_stream,true)
 
 PRODUCT_PACKAGES += \
+    awinic_haptic_primitives.xml \
     vendor.qti.hardware.vibrator.service
 
 PRODUCT_COPY_FILES += \
