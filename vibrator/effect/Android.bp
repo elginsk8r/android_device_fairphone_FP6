@@ -1,18 +1,24 @@
-Common_CFlags = ["-Wall"]
-Common_CFlags += ["-Werror"]
+//
+// SPDX-FileCopyrightText: The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+Common_CFlags = ["-Wall", "-Werror"]
 
 cc_library_shared {
-    name: "libqtivibratoreffect.awinic",
+    name: "libqtivibratoreffect-awinic",
     vendor: true,
     cflags: Common_CFlags,
-    srcs: [
-        "effect.cpp",
-    ],
+    srcs: ["effect.cpp"],
     shared_libs: [
-        "libcutils",
-        "libutils",
+        "liblog",
+        "libtinyxml2",
     ],
-    header_libs: [
-        "libqtivibratoreffect_headers",
-    ],
+    header_libs: ["libqtivibratoreffect_headers"],
+}
+
+prebuilt_etc {
+    name: "awinic_haptic_primitives.xml",
+    src: "awinic_haptic_primitives.xml",
+    vendor: true,
 }

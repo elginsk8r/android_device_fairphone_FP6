@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Awinic HapticHV effect map for the QTI vibrator HAL (USE_EFFECT_STREAM).
+
+  Install as:
+    /odm/etc/awinic_haptic_primitives.xml      (preferred)
+    /vendor/etc/awinic_haptic_primitives.xml
+
+  IDs match android.hardware.vibrator:
+    Effect             0..21
+    CompositePrimitive 0..8  (HAL passes id | 0x8000)
+
+  Only a single RAM waveform can be played per request (driver reads one
+  int16 wave id from FF_PERIODIC custom_data). Multi-pulse / ramp effects
+  that cannot be expressed as one shot are left as wave="none" unless the
+  bin has a dedicated waveform and you map it explicitly.
+
+  Wave ids must be 1 .. ram_num-1. Waveform ram_num is the driver's reserved
+  loop slot and is rejected for one-shot playback.
+-->
+<haptic>
+
+  <!--
+    Global RAM timing. Defaults match the stock aw-haptic-hv driver
+    (set_pwm(AW_PWM_24K) → 24 kHz).
+  -->
+  <ram rate_hz="24000" margin_ms="2"/>
+
+  <!--
+    Optional measured durations (ms). When set, these are final values;
+    margin_ms is not added. Unlisted waves are derived from bin byte length.
+  -->
+  <wave id="1" ms="12"/>   <!-- short / light -->
+  <wave id="2" ms="18"/>   <!-- medium -->
+  <wave id="3" ms="28"/>   <!-- heavy -->
+  <wave id="4" ms="10"/>   <!-- tick -->
+  <wave id="5" ms="22"/>   <!-- thud-ish -->
+
+  <!--
+    android.hardware.vibrator.Effect
+  -->
+  <effect id="0"  wave="2"/>      <!-- CLICK -->
+  <effect id="1"  wave="none"/>   <!-- DOUBLE_CLICK — needs two pulses -->
+  <effect id="2"  wave="4"/>      <!-- TICK -->
+  <effect id="3"  wave="5"/>      <!-- THUD -->
+  <effect id="4"  wave="1"/>      <!-- POP -->
+  <effect id="5"  wave="3"/>      <!-- HEAVY_CLICK -->
+  <effect id="6"  wave="none"/>   <!-- RINGTONE_1 -->
+  <effect id="7"  wave="none"/>   <!-- RINGTONE_2 -->
+  <effect id="8"  wave="none"/>   <!-- RINGTONE_3 -->
+  <effect id="9"  wave="none"/>   <!-- RINGTONE_4 -->
+  <effect id="10" wave="none"/>   <!-- RINGTONE_5 -->
+  <effect id="11" wave="none"/>   <!-- RINGTONE_6 -->
+  <effect id="12" wave="none"/>   <!-- RINGTONE_7 -->
+  <effect id="13" wave="none"/>   <!-- RINGTONE_8 -->
+  <effect id="14" wave="none"/>   <!-- RINGTONE_9 -->
+  <effect id="15" wave="none"/>   <!-- RINGTONE_10 -->
+  <effect id="16" wave="none"/>   <!-- RINGTONE_11 -->
+  <effect id="17" wave="none"/>   <!-- RINGTONE_12 -->
+  <effect id="18" wave="none"/>   <!-- RINGTONE_13 -->
+  <effect id="19" wave="none"/>   <!-- RINGTONE_14 -->
+  <effect id="20" wave="none"/>   <!-- RINGTONE_15 -->
+  <effect id="21" wave="4"/>      <!-- TEXTURE_TICK -->
+
+  <!--
+    android.hardware.vibrator.CompositePrimitive
+
+    Framework builds longer haptics by sequencing these. SPIN / RISE / FALL
+    need ramps or multiple segments and stay unsupported unless mapped.
+  -->
+  <primitive id="0" wave="none"/> <!-- NOOP -->
+  <primitive id="1" wave="2"/>    <!-- CLICK -->
+  <primitive id="2" wave="5"/>    <!-- THUD -->
+  <primitive id="3" wave="none"/> <!-- SPIN -->
+  <primitive id="4" wave="none"/> <!-- QUICK_RISE -->
+  <primitive id="5" wave="none"/> <!-- SLOW_RISE -->
+  <primitive id="6" wave="none"/> <!-- QUICK_FALL -->
+  <primitive id="7" wave="1"/>    <!-- LIGHT_TICK -->
+  <primitive id="8" wave="2"/>    <!-- LOW_TICK -->
+
+</haptic>
